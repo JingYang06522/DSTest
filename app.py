@@ -281,8 +281,15 @@ st.divider()
 
 st.header("💰 Price Prediction")
 
+col1, col2, col3 = st.columns([1, 2, 1])
 
-if st.button("Predict Median Price"):
+with col2:
+    predict_button = st.button(
+        "💰 Predict Median Price",
+        use_container_width=True
+    )
+
+if predict_button:
 
     # -----------------------------------------------------
     # Create input data
