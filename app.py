@@ -8,12 +8,13 @@ Original file is located at
 """
 
 import streamlit as st
-import pandas as pd
 import joblib
+import pandas as pd
 
-# ==========================================
+
+# =========================================================
 # PAGE CONFIGURATION
-# ==========================================
+# =========================================================
 
 st.set_page_config(
     page_title="Malaysia Housing Price Predictor",
@@ -21,38 +22,56 @@ st.set_page_config(
     layout="centered"
 )
 
-# ==========================================
+
+# =========================================================
 # LOAD DATASET
-# ==========================================
+# =========================================================
 
 @st.cache_data
 def load_data():
     return pd.read_csv("malaysia_house_price_data_2025.csv")
 
 
-# ==========================================
-# LOAD MODELS
-# ==========================================
+df = load_data()
+
+
+# =========================================================
+# GET CATEGORICAL VALUES
+# =========================================================
+
+states = sorted(
+    df["State"].dropna().unique().tolist()
+)
+
+tenures = sorted(
+    df["Tenure"].dropna().unique().tolist()
+)
+
+property_types = sorted(
+    df["Type"].dropna().unique().tolist()
+)
+
+
+# =========================================================
+# LOAD TRAINED MODELS
+# =========================================================
 
 @st.cache_resource
 def load_models():
     return joblib.load("housing_models.joblib")
 
 
-# ==========================================
-# LOAD FILES
-# ==========================================
-
-df = load_data()
 model_bundle = load_models()
 
 models = model_bundle["models"]
 metrics = model_bundle["metrics"]
 
+preprocessor = model_bundle.get("preprocessor", None)
 
-# ==========================================
-# APP
-# ==========================================
+
+# =========================================================
+# MAIN PAGE
+# =========================================================
 
 st.title("🏠 Malaysia Housing Price Predictor")
 
@@ -62,21 +81,298 @@ st.write(
     "machine-learning regression models."
 )
 
-st.success("Dataset and models loaded successfully!")
+st.write(
+    "Enter the property information below and select a "
+    "machine-learning model to obtain an estimated median price."
+)
 
-# Dataset information
-st.subheader("Dataset")
 
-st.write(f"Number of records: {len(df)}")
-st.write(f"Number of variables: {len(df.columns)}")
+# =========================================================
+# MODEL SELECTION
+# =========================================================
 
-# Model information
-st.subheader("Available Models")
+st.header("🤖 Select Machine Learning Model")
 
-for model_name in models:
-    st.write(f"• {model_name}")
+selected_model = st.selectbox(
+    "Choose a model:",
+    [
+        "Linear Regression",
+        "Random Forest",
+        "XGBoost",
+        "CatBoost"
+    ]
+)
 
-# Preview
-st.subheader("Dataset Preview")
+st.info(
+    f"Selected model: **{selected_model}**"
+)
 
-st.dataframe(df.head())
+
+# =========================================================
+# PROPERTY INFORMATION
+# =========================================================
+
+st.header("🏡 Property Information")
+
+st.write(
+    "Please provide the following property details:"
+)
+
+
+# =========================================================
+# STATE AND AREA RELATIONSHIP
+# =========================================================
+
+# Initial State
+if "selected_state" not in st.session_state:
+    st.session_state.selected_state = states[0]
+
+
+# Get areas for the initial state
+initial_areas = sorted(
+    df.loc[
+        df["State"] == st.session_state.selected_state,
+        "Area"
+    ].dropna().unique().tolist()
+)
+
+
+# Initial Area
+if "selected_area" not in st.session_state:
+    if initial_areas:
+        st.session_state.selected_area = initial_areas[0]
+    else:
+        st.session_state.selected_area = ""
+
+
+# ---------------------------------------------------------
+# When State changes, update Area
+# ---------------------------------------------------------
+
+def update_area_from_state():
+
+    selected_state = st.session_state.selected_state
+
+    available_areas = sorted(
+        df.loc[
+            df["State"] == selected_state,
+            "Area"
+        ].dropna().unique().tolist()
+    )
+
+    if available_areas:
+        st.session_state.selected_area = available_areas[0]
+
+
+# ---------------------------------------------------------
+# When Area changes, update State
+# ---------------------------------------------------------
+
+def update_state_from_area():
+
+    selected_area = st.session_state.selected_area
+
+    matching_states = (
+        df.loc[
+            df["Area"] == selected_area,
+            "State"
+        ]
+        .dropna()
+        .unique()
+        .tolist()
+    )
+
+    if matching_states:
+        st.session_state.selected_state = matching_states[0]
+
+
+# =========================================================
+# STATE DROPDOWN
+# =========================================================
+
+state = st.selectbox(
+    "State",
+    states,
+    key="selected_state",
+    on_change=update_area_from_state
+)
+
+
+# =========================================================
+# AREA DROPDOWN
+# =========================================================
+
+filtered_areas = sorted(
+    df.loc[
+        df["State"] == state,
+        "Area"
+    ].dropna().unique().tolist()
+)
+
+
+# Make sure selected Area belongs to selected State
+if filtered_areas:
+
+    if st.session_state.selected_area not in filtered_areas:
+        st.session_state.selected_area = filtered_areas[0]
+
+else:
+
+    st.session_state.selected_area = ""
+
+
+area = st.selectbox(
+    "Area",
+    filtered_areas,
+    key="selected_area",
+    on_change=update_state_from_area
+)
+
+
+# =========================================================
+# TENURE
+# =========================================================
+
+tenure = st.selectbox(
+    "Tenure",
+    tenures
+)
+
+
+# =========================================================
+# PROPERTY TYPE
+# =========================================================
+
+property_type = st.selectbox(
+    "Property Type",
+    property_types
+)
+
+
+# =========================================================
+# MEDIAN PSF
+# =========================================================
+
+median_psf = st.number_input(
+    "Median Price Per Square Foot (RM)",
+    min_value=0.0,
+    value=300.0,
+    step=1.0
+)
+
+
+# =========================================================
+# TRANSACTIONS
+# =========================================================
+
+transactions = st.number_input(
+    "Number of Transactions",
+    min_value=0,
+    value=100,
+    step=1
+)
+
+
+# =========================================================
+# PREDICTION
+# =========================================================
+
+st.divider()
+
+st.header("💰 Price Prediction")
+
+
+if st.button("Predict Median Price"):
+
+    # -----------------------------------------------------
+    # Create input data
+    # -----------------------------------------------------
+
+    input_data = pd.DataFrame({
+        "Area": [area],
+        "State": [state],
+        "Tenure": [tenure],
+        "Type": [property_type],
+        "Median_PSF": [median_psf],
+        "Transactions": [transactions]
+    })
+
+
+    # -----------------------------------------------------
+    # Get selected model
+    # -----------------------------------------------------
+
+    model = models[selected_model]
+
+
+    # -----------------------------------------------------
+    # Prediction
+    #
+    # CatBoost was trained natively with categorical data.
+    #
+    # The other three models use the saved preprocessor.
+    # -----------------------------------------------------
+
+    if selected_model == "CatBoost":
+
+        prediction = model.predict(input_data)[0]
+
+    else:
+
+        if preprocessor is None:
+            st.error(
+                "The saved model bundle does not contain "
+                "the required preprocessor."
+            )
+            st.stop()
+
+        transformed_input = preprocessor.transform(input_data)
+
+        prediction = model.predict(transformed_input)[0]
+
+
+    # -----------------------------------------------------
+    # Display prediction
+    # -----------------------------------------------------
+
+    st.success(
+        f"Estimated Median Property Price: "
+        f"RM {prediction:,.2f}"
+    )
+
+
+    # -----------------------------------------------------
+    # Display selected model
+    # -----------------------------------------------------
+
+    st.write(
+        f"**Model used:** {selected_model}"
+    )
+
+
+    # -----------------------------------------------------
+    # Display input summary
+    # -----------------------------------------------------
+
+    st.subheader("Prediction Input")
+
+    input_display = pd.DataFrame({
+        "Feature": [
+            "State",
+            "Area",
+            "Tenure",
+            "Property Type",
+            "Median PSF",
+            "Transactions"
+        ],
+        "Value": [
+            state,
+            area,
+            tenure,
+            property_type,
+            f"RM {median_psf:,.2f}",
+            f"{transactions:,}"
+        ]
+    })
+
+    st.table(input_display)
