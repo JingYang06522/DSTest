@@ -66,9 +66,6 @@ model_bundle = load_models()
 models = model_bundle["models"]
 metrics = model_bundle["metrics"]
 
-preprocessor = model_bundle.get("preprocessor", None)
-
-
 # =========================================================
 # MAIN PAGE
 # =========================================================
