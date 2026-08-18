@@ -309,30 +309,7 @@ if predict_button:
     model = models[selected_model]
 
 
-    # -----------------------------------------------------
-    # Prediction
-    #
-    # CatBoost was trained natively with categorical data.
-    #
-    # The other three models use the saved preprocessor.
-    # -----------------------------------------------------
-
-    if selected_model == "CatBoost":
-
-        prediction = model.predict(input_data)[0]
-
-    else:
-
-        if preprocessor is None:
-            st.error(
-                "The saved model bundle does not contain "
-                "the required preprocessor."
-            )
-            st.stop()
-
-        transformed_input = preprocessor.transform(input_data)
-
-        prediction = model.predict(transformed_input)[0]
+    prediction = model.predict(input_data)[0]
 
 
     # -----------------------------------------------------
