@@ -73,7 +73,7 @@ preprocessor = model_bundle.get("preprocessor", None)
 # MAIN PAGE
 # =========================================================
 
-st.title("🏠 Malaysia Housing Price Predictor")
+st.title("Malaysia Housing Price Predictor")
 
 st.write(
     "This application predicts the median property price "
