@@ -91,7 +91,7 @@ st.write(
 # MODEL SELECTION
 # =========================================================
 
-st.header("🤖 Select Machine Learning Model")
+st.header("Select Machine Learning Model")
 
 selected_model = st.selectbox(
     "Choose a model:",
