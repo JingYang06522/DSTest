@@ -63,6 +63,7 @@ def load_models():
 
 model_bundle = load_models()
 
+preprocessor = model_bundle["preprocessor"]
 models = model_bundle["models"]
 metrics = model_bundle["metrics"]
 
@@ -75,7 +76,8 @@ st.title("Malaysia Housing Price Predictor")
 st.write(
     "This application predicts the median property price "
     "of residential properties in Malaysia using four "
-    "machine-learning regression models."
+    "machine-learning regression models: Linear Regression, "
+    "Decision Tree, Random Forest, and Gradient Boosting."
 )
 
 st.write(
@@ -94,9 +96,9 @@ selected_model = st.selectbox(
     "Choose a model:",
     [
         "Linear Regression",
+        "Decision Tree",
         "Random Forest",
-        "XGBoost",
-        "CatBoost"
+        "Gradient Boosting"
     ]
 )
 
@@ -252,7 +254,8 @@ property_type = st.selectbox(
 
 median_psf = st.number_input(
     "Median Price Per Square Foot (RM)",
-    min_value=0.0,
+    min_value=38.0,
+    max_value=1045.0,
     value=300.0,
     step=1.0
 )
@@ -264,8 +267,9 @@ median_psf = st.number_input(
 
 transactions = st.number_input(
     "Number of Transactions",
-    min_value=0,
-    value=100,
+    min_value=10,
+    max_value=76,
+    value=20,
     step=1
 )
 
@@ -305,12 +309,22 @@ if predict_button:
     # -----------------------------------------------------
     # Get selected model
     # -----------------------------------------------------
-
+    
     model = models[selected_model]
-
-
-    prediction = model.predict(input_data)[0]
-
+    
+    
+    # -----------------------------------------------------
+    # Apply preprocessing
+    # -----------------------------------------------------
+    
+    input_processed = preprocessor.transform(input_data)
+    
+    
+    # -----------------------------------------------------
+    # Make prediction
+    # -----------------------------------------------------
+    
+    prediction = model.predict(input_processed)[0]
 
     # -----------------------------------------------------
     # Display prediction
