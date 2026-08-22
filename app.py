@@ -29,7 +29,7 @@ st.set_page_config(
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("malaysia_house_price_data_2025.csv")
+    return pd.read_csv("malaysia_house_price_data_2025_cleaned.csv")
 
 
 df = load_data()
@@ -58,7 +58,7 @@ property_types = sorted(
 
 @st.cache_resource
 def load_models():
-    return joblib.load("housing_models.joblib")
+    return joblib.load("malaysia_house_price_models.joblib")
 
 
 model_bundle = load_models()
