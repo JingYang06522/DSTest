@@ -325,16 +325,7 @@ if predict_button:
     # -----------------------------------------------------
     
     prediction = model.predict(input_processed)[0]
-
-    # -----------------------------------------------------
-    # Display prediction
-    # -----------------------------------------------------
-
-    st.success(
-        f"Estimated Median Property Price: "
-        f"RM {prediction:,.2f}"
-    )
-
+    
 
     # -----------------------------------------------------
     # Display selected model
@@ -342,4 +333,13 @@ if predict_button:
 
     st.write(
         f"**Model used:** {selected_model}"
+    )
+    
+    # -----------------------------------------------------
+    # Display prediction
+    # -----------------------------------------------------
+
+    st.success(
+        f"Estimated Median Property Price: "
+        f"RM {prediction:,.2f}"
     )
