@@ -343,31 +343,3 @@ if predict_button:
     st.write(
         f"**Model used:** {selected_model}"
     )
-
-
-    # -----------------------------------------------------
-    # Display input summary
-    # -----------------------------------------------------
-
-    st.subheader("Prediction Input")
-
-    input_display = pd.DataFrame({
-        "Feature": [
-            "State",
-            "Area",
-            "Tenure",
-            "Property Type",
-            "Median PSF",
-            "Transactions"
-        ],
-        "Value": [
-            state,
-            area,
-            tenure,
-            property_type,
-            f"RM {median_psf:,.2f}",
-            f"{transactions:,}"
-        ]
-    })
-
-    st.table(input_display)
