@@ -95,7 +95,7 @@ tab1, tab2, tab3 = st.tabs(
     [
         "🏠 Price Predictor",
         "📊 Model Evaluation",
-        "📈 EDA"
+        "📈 Exploratory Data Analysis"
     ]
 )
 
