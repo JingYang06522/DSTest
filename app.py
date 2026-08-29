@@ -435,14 +435,14 @@ with tab2:
 
     st.caption(
         "Figure: Comparison of the performance of the four "
-        "machine-learning regression models."
+        "tuned machine-learning regression models with untuned baseline model."
     )
 
     # ---------------------------------------------------------
     # ACTUAL VS PREDICTED
     # ---------------------------------------------------------
 
-    st.subheader("Actual vs Predicted Values")
+    st.subheader("Overfitting check")
 
     st.image(
         "overfitting_comparison.png",
@@ -450,7 +450,7 @@ with tab2:
     )
 
     st.caption(
-        "Figure: Actual versus predicted median property prices "
+        "Figure: Overfitting check of Train and Test R² Score "
         "for all four regression models."
     )
 
@@ -474,7 +474,7 @@ with tab2:
     # RANDOM FOREST FEATURE IMPORTANCE
     # ---------------------------------------------------------
 
-    st.subheader("Random Forest Feature Importance")
+    st.subheader("Top Features of Decision Tree")
 
     st.image(
         "top_feature_tuned_decision_tree.png",
@@ -482,10 +482,10 @@ with tab2:
     )
 
     st.caption(
-        "Figure: Feature importance produced by the Random Forest model."
+        "Figure: Feature importance produced by the Decision Tree model."
     )
 
-    st.subheader("Top Feature Of Gradient Boosting")
+    st.subheader("Top Features Of Gradient Boosting")
 
     st.image(
         "top_feature_tuned_gradient_boosting.png",
@@ -493,10 +493,10 @@ with tab2:
     )
 
     st.caption(
-        "Figure: Feature importance produced by the Random Forest model."
+        "Figure: Feature importance produced by the Gradient Boosting model."
     )
     
-    st.subheader("Top Feature Of Linear Regression")
+    st.subheader("Top Features Of Linear Regression")
     
     st.image(
         "top_feature_tuned_linear_regression.png",
@@ -504,10 +504,10 @@ with tab2:
     )
 
     st.caption(
-        "Figure: Feature importance produced by the Random Forest model."
+        "Figure: Feature importance produced by the Linear Regression model."
     )
 
-    st.subheader("Random Forest Feature Importance")
+    st.subheader("Top Features of Random Forest")
 
     st.image(
         "top_feature_tuned_random_forest.png",
@@ -518,7 +518,7 @@ with tab2:
         "Figure: Feature importance produced by the Random Forest model."
     )
 
-    st.subheader("Random Forest Feature Importance")
+    st.subheader("Actual vs Predicted Median Price of Gradient Boosting model")
 
     st.image(
         "tuned_gradient_boosting_actual_predicted.png",
@@ -526,7 +526,7 @@ with tab2:
     )
 
     st.caption(
-        "Figure: Feature importance produced by the Random Forest model."
+        "Figure: Show how accurately of the model predicts the median price."
     )
 
 # =========================================================
@@ -543,101 +543,73 @@ with tab3:
         "between important variables."
     )
 
-    # ---------------------------------------------------------
-    # PRICE DISTRIBUTION
-    # ---------------------------------------------------------
+    st.subheader("Distribution of Housing Price")
 
-    st.subheader("Price Distribution")
+    st.image(
+        "distribution_of_median_housing_price.png",
+        use_container_width=True
+    )
 
-    col1, col2 = st.columns(2)
+    st.caption(
+        "Figure: Distribution of median housing prices."
+    )
+    
+    st.subheader("Distribution of Property by State")
 
-    with col1:
+    st.image(
+        "distribution_of_property_by_state.png",
+        use_container_width=True
+    )
 
-        st.image(
-            "distribution_of_median_housing_price.png",
-            use_container_width=True
-        )
+    st.caption(
+        "Figure: Distribution of the records group by state."
+    )
 
-        st.caption(
-            "Figure: Distribution of median property prices."
-        )
+    st.subheader("Distribution of Property Type")
 
-    with col2:
+    st.image(
+        "distribution_of_property_type.png",
+        use_container_width=True
+    )
 
-        st.image(
-            "distribution_of_property_by_state.png",
-            use_container_width=True
-        )
+    st.caption(
+        "Figure: Distribution of Property Type."
+    )
 
-        st.caption(
-            "Figure: Boxplot of median property prices."
-        )
+    st.subheader("Distribution of Median Price Per Square Foot")
 
-    # ---------------------------------------------------------
-    # PRICE PER SQUARE FOOT
-    # ---------------------------------------------------------
+    st.image(
+        "distribution_of_psf.png",
+        use_container_width=True
+    )
 
-    st.subheader("Median Price Per Square Foot")
+    st.caption(
+        "Figure: Distribution of the Median Price per Square Foot."
+    )
 
-    col1, col2 = st.columns(2)
+    st.subheader("Distibution of Property Transactions")
 
-    with col1:
+    st.image(
+        "distribution_of_transaction.png",
+        use_container_width=True
+    )
 
-        st.image(
-            "distribution_of_property_type.png",
-            use_container_width=True
-        )
+    st.caption(
+        "Figure: Distribution of the number of transactions."
+    )
+    
+    st.subheader("Correlation Heatmap of Numerical Variable")
 
-        st.caption(
-            "Figure: Distribution of median price per square foot."
-        )
+    st.image(
+        "heatmap_num_variable.png",
+        use_container_width=True
+    )
 
-    with col2:
+    st.caption(
+        "Figure: A correlation heatmap displaying the linear relationships between numerical variables."
+    )
 
-        st.image(
-            "distribution_of_psf.png",
-            use_container_width=True
-        )
-
-        st.caption(
-            "Figure: Boxplot of median price per square foot."
-        )
-
-    # ---------------------------------------------------------
-    # TRANSACTION DISTRIBUTION
-    # ---------------------------------------------------------
-
-    st.subheader("Transaction Analysis")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        st.image(
-            "distribution_of_transaction.png",
-            use_container_width=True
-        )
-
-        st.caption(
-            "Figure: Distribution of the number of transactions."
-        )
-
-    with col2:
-
-        st.image(
-            "heatmap_num_variable.png",
-            use_container_width=True
-        )
-
-        st.caption(
-            "Figure: Boxplot of the number of transactions."
-        )
-
-    # ---------------------------------------------------------
-    # PRICE BY STATE
-    # ---------------------------------------------------------
-
-    st.subheader("Price by State")
+    st.subheader("Median Price by State and Type")
 
     st.image(
         "heatmap_state_type.png",
@@ -645,14 +617,10 @@ with tab3:
     )
 
     st.caption(
-        "Figure: Median property price by Malaysian state."
+        "Figure: A heatmap illustrating median property prices (in RM) across Malaysian states broken down by property type, highlighting significantly higher valuations for bungalows and premium residences in major urban areas like Kuala Lumpur, Putrajaya, and Selangor."
     )
 
-    # ---------------------------------------------------------
-    # PRICE BY PROPERTY TYPE
-    # ---------------------------------------------------------
-
-    st.subheader("Price by Property Type")
+    st.subheader("Median Price by Property Type")
 
     st.image(
         "median_price_by_type.png",
@@ -663,11 +631,7 @@ with tab3:
         "Figure: Property prices across different property types."
     )
 
-    # ---------------------------------------------------------
-    # PRICE BY TENURE
-    # ---------------------------------------------------------
-
-    st.subheader("Price by Tenure")
+    st.subheader("Median Price per Square Foot by Type")
 
     st.image(
         "psf_by_type.png",
@@ -675,37 +639,29 @@ with tab3:
     )
 
     st.caption(
-        "Figure: Property prices across different tenure types."
+        "Figure: A boxplot comparing the distribution of median price per square foot (RM) across different property types."
     )
 
-    # ---------------------------------------------------------
-    # PRICE VS PRICE PER SQUARE FOOT
-    # ---------------------------------------------------------
+    st.subheader("Relationship between Median Price per Square Foot and Median Price")
+    
+    st.image(
+        "relationship_of_psf_price.png",
+        use_container_width=True
+    )
 
-    st.subheader("Price Relationships")
+    st.caption(
+        "Figure: Relationship between median property price "
+        "and median price per square foot."
+    )
 
-    col1, col2 = st.columns(2)
+    st.subheader("Relationship between Transaction and Median Price")
+    
+    st.image(
+        "relationship_of_transaction_price.png",
+        use_container_width=True
+    )
 
-    with col1:
-
-        st.image(
-            "relationship_of_psf_price.png",
-            use_container_width=True
-        )
-
-        st.caption(
-            "Figure: Relationship between median property price "
-            "and median price per square foot."
-        )
-
-    with col2:
-
-        st.image(
-            "relationship_of_transaction_price.png",
-            use_container_width=True
-        )
-
-        st.caption(
-            "Figure: Relationship between median property price "
-            "and number of transactions."
-        )
+    st.caption(
+        "Figure: Relationship between median property price "
+        "and number of transactions."
+    )
