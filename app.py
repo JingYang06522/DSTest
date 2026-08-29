@@ -485,48 +485,49 @@ with tab2:
         "Figure: Feature importance produced by the Random Forest model."
     )
 
-      st.subheader("Top Feature Of Gradient Boosting")
-    
-        st.image(
-            "top_feature_tuned_gradient_boosting.png",
-            use_container_width=True
-        )
-    
-        st.caption(
-            "Figure: Feature importance produced by the Random Forest model."
-        )
-      st.subheader("Top Feature Of Linear Regression")
-    
-        st.image(
-            "top_feature_tuned_linear_regression.png",
-            use_container_width=True
-        )
-    
-        st.caption(
-            "Figure: Feature importance produced by the Random Forest model."
-        )
+    st.subheader("Top Feature Of Gradient Boosting")
 
-        st.subheader("Random Forest Feature Importance")
-    
-        st.image(
-            "top_feature_tuned_random_forest.png",
-            use_container_width=True
-        )
-    
-        st.caption(
-            "Figure: Feature importance produced by the Random Forest model."
-        )
+    st.image(
+        "top_feature_tuned_gradient_boosting.png",
+        use_container_width=True
+    )
 
-        st.subheader("Random Forest Feature Importance")
+    st.caption(
+        "Figure: Feature importance produced by the Random Forest model."
+    )
     
-        st.image(
-            "tuned_gradient_boosting_actual_predicted.png",
-            use_container_width=True
-        )
+    st.subheader("Top Feature Of Linear Regression")
     
-        st.caption(
-            "Figure: Feature importance produced by the Random Forest model."
-        )
+    st.image(
+        "top_feature_tuned_linear_regression.png",
+        use_container_width=True
+    )
+
+    st.caption(
+        "Figure: Feature importance produced by the Random Forest model."
+    )
+
+    st.subheader("Random Forest Feature Importance")
+
+    st.image(
+        "top_feature_tuned_random_forest.png",
+        use_container_width=True
+    )
+
+    st.caption(
+        "Figure: Feature importance produced by the Random Forest model."
+    )
+
+    st.subheader("Random Forest Feature Importance")
+
+    st.image(
+        "tuned_gradient_boosting_actual_predicted.png",
+        use_container_width=True
+    )
+
+    st.caption(
+        "Figure: Feature importance produced by the Random Forest model."
+    )
 
 # =========================================================
 # TAB 3 - EXPLORATORY DATA ANALYSIS
