@@ -445,7 +445,7 @@ with tab2:
     st.subheader("Actual vs Predicted Values")
 
     st.image(
-        "fig15_actual_vs_predicted_all_models.png",
+        "overfitting_comparison.png",
         use_container_width=True
     )
 
@@ -461,7 +461,7 @@ with tab2:
     st.subheader("Residual Analysis")
 
     st.image(
-        "fig17_residual_analysis.png",
+        "residual_plot_tuned_gradient_boosting.png",
         use_container_width=True
     )
 
@@ -477,7 +477,7 @@ with tab2:
     st.subheader("Random Forest Feature Importance")
 
     st.image(
-        "fig14_random_forest_feature_importance.png",
+        "top_feature_tuned_decision_tree.png",
         use_container_width=True
     )
 
@@ -485,6 +485,48 @@ with tab2:
         "Figure: Feature importance produced by the Random Forest model."
     )
 
+      st.subheader("Top Feature Of Gradient Boosting")
+    
+        st.image(
+            "top_feature_tuned_gradient_boosting.png",
+            use_container_width=True
+        )
+    
+        st.caption(
+            "Figure: Feature importance produced by the Random Forest model."
+        )
+      st.subheader("Top Feature Of Linear Regression")
+    
+        st.image(
+            "top_feature_tuned_linear_regression.png",
+            use_container_width=True
+        )
+    
+        st.caption(
+            "Figure: Feature importance produced by the Random Forest model."
+        )
+
+        st.subheader("Random Forest Feature Importance")
+    
+        st.image(
+            "top_feature_tuned_random_forest.png",
+            use_container_width=True
+        )
+    
+        st.caption(
+            "Figure: Feature importance produced by the Random Forest model."
+        )
+
+        st.subheader("Random Forest Feature Importance")
+    
+        st.image(
+            "tuned_gradient_boosting_actual_predicted.png",
+            use_container_width=True
+        )
+    
+        st.caption(
+            "Figure: Feature importance produced by the Random Forest model."
+        )
 
 # =========================================================
 # TAB 3 - EXPLORATORY DATA ANALYSIS
