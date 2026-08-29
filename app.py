@@ -617,7 +617,7 @@ with tab3:
     )
 
     st.caption(
-        "Figure: A heatmap illustrating median property prices (in RM) across Malaysian states broken down by property type, highlighting significantly higher valuations for bungalows and premium residences in major urban areas like Kuala Lumpur, Putrajaya, and Selangor."
+        "Figure: A heatmap illustrating median property prices (in RM) across Malaysian states broken down by property type."
     )
 
     st.subheader("Median Price by Property Type")
