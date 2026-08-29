@@ -625,7 +625,7 @@ with tab3:
     with col2:
 
         st.image(
-            "heatmap_num_varirable.png",
+            "heatmap_num_variable.png",
             use_container_width=True
         )
 
