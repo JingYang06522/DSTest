@@ -554,7 +554,7 @@ with tab3:
     with col1:
 
         st.image(
-            "eda_01_price_distribution.png",
+            "distribution_of_median_housing_price.png",
             use_container_width=True
         )
 
@@ -565,7 +565,7 @@ with tab3:
     with col2:
 
         st.image(
-            "fig4_boxplot_median_price.png",
+            "distribution_of_property_by_state.png",
             use_container_width=True
         )
 
@@ -584,7 +584,7 @@ with tab3:
     with col1:
 
         st.image(
-            "eda_02_psf_distribution.png",
+            "distribution_of_property_type.png",
             use_container_width=True
         )
 
@@ -595,7 +595,7 @@ with tab3:
     with col2:
 
         st.image(
-            "fig5_boxplot_median_psf.png",
+            "distribution_of_psf.png",
             use_container_width=True
         )
 
@@ -614,7 +614,7 @@ with tab3:
     with col1:
 
         st.image(
-            "eda_03_transaction_distribution.png",
+            "distribution_of_transaction.png",
             use_container_width=True
         )
 
@@ -625,7 +625,7 @@ with tab3:
     with col2:
 
         st.image(
-            "fig6_boxplot_transaction.png",
+            "heatmap_num_varirable.png",
             use_container_width=True
         )
 
@@ -640,7 +640,7 @@ with tab3:
     st.subheader("Price by State")
 
     st.image(
-        "fig7_median_price_by_state.png",
+        "heatmap_state_type.png",
         use_container_width=True
     )
 
@@ -655,7 +655,7 @@ with tab3:
     st.subheader("Price by Property Type")
 
     st.image(
-        "fig8_price_by_property_type.png",
+        "median_price_by_type.png",
         use_container_width=True
     )
 
@@ -670,7 +670,7 @@ with tab3:
     st.subheader("Price by Tenure")
 
     st.image(
-        "fig9_price_by_tenure.png",
+        "psd_by_type.png",
         use_container_width=True
     )
 
@@ -689,7 +689,7 @@ with tab3:
     with col1:
 
         st.image(
-            "fig10_price_vs_psf.png",
+            "relationship_of_psf_price.png",
             use_container_width=True
         )
 
@@ -701,7 +701,7 @@ with tab3:
     with col2:
 
         st.image(
-            "fig11_price_vs_transactions.png",
+            "relationship_of_transaction_price.png",
             use_container_width=True
         )
 
@@ -709,33 +709,3 @@ with tab3:
             "Figure: Relationship between median property price "
             "and number of transactions."
         )
-
-    # ---------------------------------------------------------
-    # STATE AND PROPERTY TYPE HEATMAP
-    # ---------------------------------------------------------
-
-    st.subheader("State and Property Type Analysis")
-
-    st.image(
-        "fig12_state_property_type_heatmap.png",
-        use_container_width=True
-    )
-
-    st.caption(
-        "Figure: Relationship between state and property type."
-    )
-
-    # ---------------------------------------------------------
-    # CORRELATION HEATMAP
-    # ---------------------------------------------------------
-
-    st.subheader("Correlation Analysis")
-
-    st.image(
-        "fig13_correlation_heatmap.png",
-        use_container_width=True
-    )
-
-    st.caption(
-        "Figure: Correlation analysis of numerical variables."
-    )
