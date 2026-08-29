@@ -670,7 +670,7 @@ with tab3:
     st.subheader("Price by Tenure")
 
     st.image(
-        "psd_by_type.png",
+        "psf_by_type.png",
         use_container_width=True
     )
 
