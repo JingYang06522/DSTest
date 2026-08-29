@@ -429,7 +429,7 @@ with tab2:
     st.subheader("Model Performance Comparison")
 
     st.image(
-        "fig16_model_performance_comparison.png",
+        "final_benchmark.png",
         use_container_width=True
     )
 
