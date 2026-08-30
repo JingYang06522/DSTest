@@ -641,7 +641,29 @@ with tab3:
     st.caption(
         "Figure: A boxplot comparing the distribution of median price per square foot (RM) across different property types."
     )
+    
+    st.subheader("Median Price by Tenure")
+    
+    st.image(
+        "price_by_tenure.png",
+        use_container_width=True
+    )
 
+    st.caption(
+        "Figure: A boxplot comparing the disribution of price across tenure."
+    )
+
+    st.subheader("Transaction by Type")
+    
+    st.image(
+        "trans_by_type.png",
+        use_container_width=True
+    )
+
+    st.caption(
+        "Figure: Showing the transaction activity across property type."
+    )
+    
     st.subheader("Relationship between Median Price per Square Foot and Median Price")
     
     st.image(
@@ -664,4 +686,26 @@ with tab3:
     st.caption(
         "Figure: Relationship between median property price "
         "and number of transactions."
+    )
+
+    st.subheader("Original Median Price Distribution by Type")
+    
+    st.image(
+        "ori_price_by_type.png",
+        use_container_width=True
+    )
+
+    st.caption(
+        "Figure: Showing the raw dataset median price distribution with property type."
+    )
+
+    st.subheader("Median Price Distribution by Type after Capping")
+    
+    st.image(
+        "3iqr_price.png",
+        use_container_width=True
+    )
+
+    st.caption(
+        "Figure: Showing the cleaned dataset median price distribution with property type."
     )
